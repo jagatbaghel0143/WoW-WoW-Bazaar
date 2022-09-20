@@ -4,8 +4,7 @@ const sgMail = require('@sendgrid/mail');
 
 module.exports = function (email, username, token, forgetPswdFlag, cb) {
 
-    // sgMail.setApiKey('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');
-    sgMail.setApiKey('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');
+    sgMail.setApiKey('[Write your private key]');
     if (!forgetPswdFlag) {
         const msg = {
             to: email, // Change to your recipient
