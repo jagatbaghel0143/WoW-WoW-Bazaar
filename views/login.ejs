@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" href="/styles/login.css">
+    <title>Login Page</title>
+  </head>
+  <body>
+    <%- include("header", {name, email, isLoggedIn, error}) %>
+    <div class="loginForm">
+      <h1>Login to Your Account</h1>
+      <form action="/login" method="post">
+        <label for="email">Email*</label><br>
+          <input name="email" type="text" placeholder="Email" required />
+          <br>
+        <label for="password">Password*</label><br>
+          <input name="password" type="password" placeholder="password" required />
+          <br>
+        <div class="btnDiv">
+          <input type="submit" value="Login" />
+          </form>
+          <a href="/signup" style="color:blue">Signup</a>
+        </div>
+        <a href="/forgetPwd" style="color:blue"><Button>Forget Password</Button></a>
+        <% if(error) {%>
+        <p style="color:red"><%= error%></p>
+        <%}%>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/login.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="loginForm">
+      <h1>Add New Product</h1>
+      <form action="/addProduct" method="post" enctype="multipart/form-data">
+        <label for="name">Name*</label><br />
+        <input
+          name="name"
+          type="text"
+          placeholder="Name of product..."
+          required
+        />
+        <br />
+        <label for="price">Price*</label><br />
+        <input
+          name="price"
+          type="text"
+          placeholder="Enter price of product..."
+          required
+        />
+        <br />
+        <label for="quantity">Quantity*</label><br />
+        <input
+          name="quantity"
+          type="text"
+          placeholder="Enter quantity of product..."
+          required
+        />
+        <br />
+        <label for="desc">Description*</label><br />
+        <input
+          name="desc"
+          type="text"
+          placeholder="Enter description of product..."
+          required
+        />
+        <br />
+        <label for="image">Image*</label><br />
+        <input name="avatar" type="file" required />
+        <br />
+        <input type="submit" value="Add Product" />
+      </form>
+      <% if(error) {%>
+      <p style="color: red"><%= error%></p>
+      <%}%>
+    </div>
+  </body>
+</html>

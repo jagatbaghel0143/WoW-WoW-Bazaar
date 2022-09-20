@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include("adminHeader", {name, email, isLoggedIn}) %> <%
+    if(products.length === 0) { %>
+    <p>No products found</p>
+    <% } %>
+
+    <div class="container" style="text-align: center">
+      <div id="list" class="row card-deck">
+        <% products.forEach(function(product, index){ %>
+        <div class="col-lg-4 mb-4" style="display: grid">
+          <div class="card" style="width: 18rem">
+            <img class="card-img-top" src="<%= product.image %>" />
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text">Price: $<%= product.price %></p>
+              <p class="card-text" id="quantity<%= index %>">
+                Quantity: <%= product.quantity %>
+              </p>
+              <button class="btn btn-primary" id="updateBtn<%= index %>">
+                Update
+              </button>
+              <button class="btn btn-danger" id="dltBtn<%= index %>">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <script>
+      let products = <%- JSON.stringify(products) %>
+      let isLoggedIn = <%- JSON.stringify(isLoggedIn) %>
+
+      products.forEach(function(product, index) {
+
+        let updateBtn = document.getElementById("updateBtn"+index);
+        updateBtn.addEventListener("click", function(){
+          if(isLoggedIn) {
+            /* console.log(product.productId, product.name); */
+            let request = new XMLHttpRequest();
+            request.open("GET", `/updateProduct?productId=${product.productId}`);
+            request.send();
+            request.addEventListener("load", function(event) {
+              // updateBtn.textContent = "Save";
+              // updateBtn.disabled = true;
+              // window.location.href = "/adminHome";
+            });
+          } else {
+            window.location.href = "/adminLogin";
+          }
+        });
+
+        let dltBtn = document.getElementById("dltBtn"+index);
+        dltBtn.addEventListener("click", function(){
+          if(isLoggedIn) {
+            let dltBtn = document.getElementById("dltBtn"+index);
+              let request = new XMLHttpRequest();
+              request.open("GET", `/deleteProduct?productId=${product.productId}`);
+              request.send();
+              request.addEventListener("load", function(event){
+                //updateBtn.textContent = "Save";
+                //updateBtn.disabled = true;
+                window.location.href = "/adminHome";
+          });
+          } else {
+            window.location.href = "/adminLogin";
+          }
+        });
+      })
+    </script>
+  </body>
+</html>

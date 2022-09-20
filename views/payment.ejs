@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <title>Payment</title>
+  <body>
+    <form action="payment" method="POST">
+      <script
+        src="//checkout.stripe.com/v2/checkout.js"
+        class="stripe-button"
+        data-key="<%= key %>"
+        data-amount="2500"    
+        data-currency="inr"
+        data-name="Crafty Gourav"
+        data-description="Handmade Art and Craft Products"
+        data-locale="auto"
+      ></script>
+    </form>
+  </body>
+</html>

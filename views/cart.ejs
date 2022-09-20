@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Cart</title>
+  </head>
+  <body>
+    <%- include("newHeader", {name, email, isLoggedIn}) %> <% if(products.length
+    === 0) { %>
+    <div
+      style="
+        width: 500px;
+        height: 500px;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h1 style="color: grey; font-weight: bold">Your Cart is Empty...!!!</h1>
+      <a href="/"> <button class="btn btn-primary">Shop Now</button></a>
+    </div>
+    <% } %>
+
+    <div class="container" style="text-align: center">
+      <div id="list" class="row card-deck">
+        <% products.forEach(function(product, index){ %> <% if(product.cartFlag)
+        { %>
+        <div class="col-lg-4 mb-4" style="display: grid">
+          <div class="card" style="width: 18rem">
+            <img class="card-img-top" src="<%= product.image %>" />
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text">Price/item: ₹<%= product.price %></p>
+              <p class="card-text" id="quantity<%= index %>">Quantity: 1</p>
+              <p class="card-text">
+                <button class="btn btn-info" id="minus<%= index %>">-</button>
+                <button class="btn btn-info" id="plus<%= index %>">+</button>
+              </p>
+              <form action="payment" method="POST">
+                <script
+                  src="//checkout.stripe.com/v2/checkout.js"
+                  class="stripe-button"
+                  data-key="<%= key %>"
+                  data-amount="<%= product.price %>"
+                  data-currency="inr"
+                  data-name="<%= product.name %>"
+                  data-description="<%= product.desc %>"
+                  data-locale="auto"
+                ></script>
+              </form>
+              <br />
+              <!-- <li>
+                <label><a href="/payment"><button class="btn btn-primary">Buy Now</button></a><label>
+              </li> -->
+              <!-- <button href="/payment" class="btn btn-success" id="buyNowBtn<%= index %>">
+                Buy Now
+              </button> -->
+              <button class="btn btn-danger" id="deleteFromCartBtn<%= index %>">
+                Delete
+              </button>
+              <button class="btn btn-secondary" id="viewBtn<%= index %>">
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+        <% } %> <% }) %>
+      </div>
+    </div>
+    <script>
+      var products = <%- JSON.stringify(products) %>
+      products.forEach(function(product, index){
+        let quantityCount  = 1;
+        var minusBtn = document.getElementById("minus"+index);
+        minusBtn.addEventListener("click", function() {
+          if(quantityCount>1 && quantityCount<=product.quantity) {
+            //console.log(quantityCount);
+            --quantityCount;
+            document.getElementById("quantity"+index).innerText = `Quantity: ${quantityCount}`;
+          } else {
+              alert("Quantity cannot be less than 1.");
+            }
+        });
+
+        var plusBtn = document.getElementById("plus"+index);
+        plusBtn.addEventListener("click", function() {
+          if(quantityCount < product.quantity) {
+            //console.log(quantityCount);
+            ++quantityCount;
+            document.getElementById("quantity"+index).innerText = `Quantity: ${quantityCount}`;
+          } else {
+              alert(`Only ${product.quantity} pieces are in stock.`);
+            }
+        });
+
+        // var buynow = document.getElementById("buyNowBtn"+index);
+
+        // buynow.addEventListener("click", function() {
+        //   //console.log(product.productId, product.name);
+        //   let request = new XMLHttpRequest();
+        //   request.open("GET", "/payment");
+        //   request.send();
+        //   request.addEventListener("load", function(event) {
+        //     console.log("page load complete");
+        //     // window.location.reload();
+
+        //   });
+        // });
+
+        var deleteFromCartBtn = document.getElementById("deleteFromCartBtn"+index);
+
+        deleteFromCartBtn.addEventListener("click", function() {
+          //console.log(product.productId, product.name);
+          let request = new XMLHttpRequest();
+          request.open("GET", `/deleteFromCart?productId=${product.productId}`);
+          request.send();
+          request.addEventListener("load", function(event) {
+            //console.log("product deleted");
+            window.location.reload();
+          });
+        });
+
+
+        var viewBtn = document.getElementById("viewBtn"+index);
+
+        viewBtn.addEventListener("click", function(){
+          alert(product.desc);
+        });
+      })
+    </script>
+  </body>
+</html>

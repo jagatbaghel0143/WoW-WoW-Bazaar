@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="/styles/header.css" rel="stylesheet" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <nav>
+      
+      <% if(isLoggedIn ) {%>
+      <li>
+        <label>Welcome to WOW WOW Bazaar, <%= name %></label>
+      </li>
+      <li>
+        <label> <%= email %> </label>
+      </li>
+      <li>
+        <label><a href="/"><button class="btn btn-primary">Back to Product Page</button></a><label>
+      </li>
+      <li>
+        <label><a href="/logout"><button class="btn btn-primary">Logout</button></a><label>
+      </li>
+      <% } else {%>
+        <li><label>Welcome to WOW WOW Bazaar</label></li>
+        <!-- <li><label>Lets shop <%= email %> with us</label></li> -->
+        <li><label><a href="/goToCart"><button class="btn btn-primary">Go To Cart..!</button></a><label></li>
+          <a>
+            <li><label><a href="/login">Login/Signup</a><label></li>
+          </a>
+      <% } %>
+    </nav>
+  </body>
+</html>
