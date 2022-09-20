@@ -1,0 +1,19 @@
+{
+  "name": "ecomerceproject",
+  "version": "1.0.0",
+  "description": "It's an Ecommerce Wed Application",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jagatbaghel8979@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "multer": "^1.4.4",
+    "stripe": "^9.5.0"
+  }
+}
