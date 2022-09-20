@@ -1,0 +1,27 @@
+nav {
+  display: flex;
+  background-color: #600fda;
+  min-height: 4rem;
+  padding: 0.5rem;
+  justify-content: center;
+}
+
+nav a {
+  color: white;
+  font-weight: bolder;
+  margin: 0 auto;
+  float: right;
+}
+
+nav label {
+  color: white;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+li {
+  text-align: center;
+  margin: auto;
+  list-style: none;
+}
