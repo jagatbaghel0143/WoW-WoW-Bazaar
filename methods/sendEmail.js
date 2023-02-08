@@ -4,7 +4,7 @@ const sgMail = require('@sendgrid/mail');
 
 module.exports = function (email, username, token, forgetPswdFlag, cb) {
 
-    sgMail.setApiKey('[Put your secret key here');
+    sgMail.setApiKey('[Put your secret key here]');
     if (!forgetPswdFlag) {
         const msg = {
             to: email, // Change to your recipient
