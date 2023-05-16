@@ -15,8 +15,8 @@ const checkAuth = require("./middlewares/checkAuth");
 const checkAdmin = require("./middlewares/checkAdmin");
 // const products = require('./products');
 
-var Publishable_Key = 'pk_test_51L4IvkSG7lkpbx444eLfVU2lr7cjLz0kQp1hAROCVVcKHRGD1K9qfduO7rXtUm04Y9MdKuRv5G2KlUSorjatRVz400wL8tWcGl'
-var Secret_Key = 'sk_test_51L4IvkSG7lkpbx44ApwUP4yVfw28zZoVL0kxq5hHqdW97mB9DAWah7SMCBmr8EgxEcm3Ccqszjun6QYJITywGkqu00eFoG0OTh'
+var Publishable_Key = "PUT_PUBLISHABLE_KEY";
+var Secret_Key = "PUT_SECRET_KEY";
 
 const stripe = require('stripe')(Secret_Key)
 
